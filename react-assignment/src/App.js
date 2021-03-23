@@ -5,6 +5,14 @@ import Card from "./components/Card";
 class App extends Component {
   state = {
     data: [],
+    selected: [],
+  };
+
+  handleSelect = (user) => {
+    if (this.state.selected.includes(user)) {
+      const newSelected = this.state.selected.filter((u) => u !== user);
+      this.setState({ selected: newSelected });
+    } else this.setState({ selected: [...this.state.selected, user] });
   };
 
   async componentDidMount() {
@@ -18,7 +26,12 @@ class App extends Component {
       <div className="app">
         <div className="container">
           {this.state.data.map((user) => (
-            <Card key={user.id} user={user} />
+            <Card
+              key={user.id}
+              user={user}
+              handleSelect={this.handleSelect}
+              selected={this.state.selected}
+            />
           ))}
         </div>
       </div>

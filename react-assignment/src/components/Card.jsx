@@ -1,6 +1,9 @@
-function Card({ user }) {
+function Card({ user, handleSelect, selected }) {
   return (
-    <div className="card">
+    <div
+      className={selected.includes(user.first_name) ? "card selected" : "card"}
+      onClick={() => handleSelect(user.first_name)}
+    >
       <div>
         <img src={user.avatar} alt={user.first_name + " info."} />
       </div>
